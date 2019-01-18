@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+{% load bootstrap4 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+</head>
+<body>
+    {% include './nav.html' %}
+    {%  if latest_category_list %}
+    <ul>
+    {% for category in latest_category_list %}
+        <li><a href="/homewear/{{ category.id }}/">{{ category.category_name }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>No categories are available.</p>
+    {% endif %}
+
+
+{# Display a form #}
+<form action="/url/to/submit/" method="post" class="form">
+  {% csrf_token %}
+    <input/></br>
+    <input/></br>
+    <input/>
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      Submit
+    </button>
+  {% endbuttons %}
+</form>
+</body>
+</html>

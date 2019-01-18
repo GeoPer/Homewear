@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% include './nav.html' %}
+    <h1>{{ question.question_text }}</h1>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'homewear:vote' category.id %}" method="post">
+        {% csrf_token %}
+        {% for product in category.product_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ product.id }}">
+            <label for="choice{{ forloop.counter }}">{{ product.product_name }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Vote">
+    </form>
+</body>
+</html>
